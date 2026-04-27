@@ -64,6 +64,9 @@
 </script>
 
 <form method="post" action="/webdav/download-selected">
+    <input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}">
     <div class="toolbar">
         <label>
             <input type="checkbox" onclick="toggleAll(this)">
