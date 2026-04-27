@@ -1,0 +1,54 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 360px;
+            margin: 80px auto;
+            background-color: #beb5ad;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color: darkred;
+        }
+
+        .success {
+            color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Rönk be!</h1>
+
+<p class="error" th:if="${param.error}">
+    Valami invalid.
+</p>
+
+<p class="success" th:if="${param.logout}">
+    Kiléptél. Gondolom észrevetted... Ezt mindig ideírják, pedig elég nyilvánvaló.
+</p>
+
+<form method="post" th:action="@{/login}">
+    <input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}">
+
+    <input type="text" name="username" placeholder="Lyúzerném?" autofocus>
+    <input type="password" name="password" placeholder="Pászvőrd?">
+
+    <button type="submit">Eressz bé!</button>
+</form>
+
+</body>
+</html>

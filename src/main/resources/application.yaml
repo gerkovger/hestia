@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: hestia
+
+webdav:
+  root: /home/gerger/webdav/scan
+
+app:
+  auth:
+    username: doppler
+    password: unikornispataB#7

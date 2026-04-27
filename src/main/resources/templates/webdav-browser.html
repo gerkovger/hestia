@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WebDAV Browser</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: #212121;
+            color: #f18c24;
+        }
+        a { text-decoration: none; color: #f18c24;}
+        table { width: 100%; border-collapse: collapse; }
+        td { padding: 8px; border-bottom: 1px solid #ddd; }
+
+        h1 {
+            display: inline-block;
+            padding-bottom: 2px;
+            margin-bottom: 2px;
+        }
+
+        .subtitle {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .toolbar {
+           display: flex;
+           align-items: center;
+           gap: 12px;
+           margin-bottom: 12px;
+        }
+
+        .logout-form {
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .logout-form button {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>Radar Adorján Fajlmegosztó</h1>
+<p class="subtitle">Amivel megosztja a fájlokat.</p>
+<p class="subtitle" style="margin-top: 5px; margin-bottom: 20px;">Képnézegető nincs hozzá. Még...</p>
+
+<p th:if="${parentPath != null}">
+    <a th:href="@{'/webdav/browse/' + ${parentPath}}">⬅ Vissza</a>
+</p>
+
+<script>
+    function toggleAll(source) {
+        document
+            .querySelectorAll('input[name="selected"]')
+            .forEach(cb => cb.checked = source.checked);
+    }
+</script>
+
+<form method="post" action="/webdav/download-selected">
+    <div class="toolbar">
+        <label>
+            <input type="checkbox" onclick="toggleAll(this)">
+            Mindet ikszeld bé!
+        </label>
+
+        <button type="submit">A beikszelteket kérem csomagban. Nem, sültkrumplit nem kérek hozzá!</button>
+    </div>
+    <p>
+        Itt áll ön:
+        <strong th:text="${currentPath == '' ? '/' : '/' + currentPath}"></strong>
+    </p>
+
+    <table>
+        <tr th:each="entry : ${entries}">
+            <td>
+                <input type="checkbox"
+                       name="selected"
+                       th:value="${entry.path}">
+            </td>
+
+            <td>
+                <span th:text="${entry.directory ? '📁' : '📄'}"></span>
+
+                <a th:if="${entry.directory}"
+                   th:href="@{'/webdav/browse/' + ${entry.path}}"
+                   th:text="${entry.name}">
+                </a>
+
+                <a th:unless="${entry.directory}"
+                   th:href="@{'/webdav/download/' + ${entry.path}}"
+                   th:text="${entry.name}">
+                </a>
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+<form method="post" th:action="@{/logout}" class="logout-form">
+    <input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}">
+    <button type="submit">Kilépek!</button>
+</form>
+</body>
+</html>
