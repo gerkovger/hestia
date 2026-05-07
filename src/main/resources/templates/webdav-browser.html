@@ -48,12 +48,6 @@
 </head>
 <body>
 <h1>Radar Adorján Fájlmegosztó</h1>
-<p class="subtitle">Amivel megosztja a fájlokat.</p>
-<p class="subtitle" style="margin-top: 5px; margin-bottom: 20px;">Képnézegető nincs hozzá. Még...</p>
-
-<p th:if="${parentPath != null}">
-    <a th:href="@{'/webdav/browse/' + ${parentPath}}">⬅ Vissza</a>
-</p>
 
 <script>
     function toggleAll(source) {
@@ -70,23 +64,23 @@
     <div class="toolbar">
         <label>
             <input type="checkbox" onclick="toggleAll(this)">
-            Mindet ikszeld bé!
+<!--            Mindet ikszeld bé!-->
         </label>
 
-        <button type="submit">A beikszelteket kérem csomagban. Nem, sültkrumplit nem kérek hozzá!</button>
+<!--        <button type="submit">A beikszelteket kérem csomagban. Nem, sültkrumplit nem kérek hozzá!</button>-->
     </div>
-    <p>
-        Itt áll ön:
-        <strong th:text="${currentPath == '' ? '/' : '/' + currentPath}"></strong>
-    </p>
+<!--    <p>-->
+<!--        Itt áll ön:-->
+<!--        <strong th:text="${currentPath == '' ? '/' : '/' + currentPath}"></strong>-->
+<!--    </p>-->
 
     <table>
         <tr th:each="entry : ${entries}">
-            <td>
-                <input type="checkbox"
-                       name="selected"
-                       th:value="${entry.path}">
-            </td>
+<!--            <td>-->
+<!--                <input type="checkbox"-->
+<!--                       name="selected"-->
+<!--                       th:value="${entry.path}">-->
+<!--            </td>-->
 
             <td>
                 <span th:text="${entry.directory ? '📁' : '📄'}"></span>
