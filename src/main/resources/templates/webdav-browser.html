@@ -69,10 +69,10 @@
 
 <!--&lt;!&ndash;        <button type="submit">A beikszelteket kérem csomagban. Nem, sültkrumplit nem kérek hozzá!</button>&ndash;&gt;-->
 <!--    </div>-->
-<!--    <p>-->
-<!--        Itt áll ön:-->
-<!--        <strong th:text="${currentPath == '' ? '/' : '/' + currentPath}"></strong>-->
-<!--    </p>-->
+    <p>
+        Itt áll ön:
+        <strong th:text="${currentPath == '' ? '/' : '/' + currentPath}"></strong>
+    </p>
 
     <table>
         <tr th:each="entry : ${entries}">
